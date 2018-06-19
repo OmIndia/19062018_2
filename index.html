@@ -1,0 +1,966 @@
+<html>
+  <head>
+    <title>My App</title>
+    <meta name="viewport" content="width=device-width,
+                                   initial-scale=1.0,
+                                   maximum-scale=1.0,
+                                   user-scalable=no,
+                                   minimal-ui">
+    <link rel="stylesheet" href="./appjs/app.min.css">
+    <style>
+      /* put your styles here */
+     /* .app-button{
+          width:400px;
+      } */
+      * {
+    padding: 0;
+    margin: 0;
+  }
+  .fit { /* set relative picture size */
+    max-width: 100%;
+    max-height: 100%;
+  }
+  .center {
+    display: block;
+    margin: auto;
+  }
+    </style>
+  </head>
+  <body oncontextmenu="return false" onkeydown="return false;" onmousedown="return false;">
+    <!-- put your pages here -->
+
+    <div class="app-page" data-page="initial">
+        <div class="app-topbar">
+            <div class="app-title">Welcome</div>
+        </div>
+        <div class="app-content">
+            <div class="app-section">
+                <!--<img src="Medical.jpg" style="width:1000px;height:500px;">  -->
+                <img src="Medical.jpg" style="width:100%;height:100%">
+                <div class="app-button green" data-target="signin">Sign-in</div>
+			</div>
+        </div>
+     </div>    
+
+
+
+    <div class="app-page" data-page="home">
+        <div class="app-topbar">
+            <div class="app-title">Home page</div>
+        </div>
+        <div class="app-content">
+    
+            <div class="app-section">
+				<div class="app-button" data-target="AddData">Add Patient Data</div>
+            </div>
+                <div class="app-section">
+				<div class="app-button" data-target="ViewData">View Patient Data</div>
+                </div>
+                <div class="app-section">
+				<div class="app-button" data-target="Enroll">Enroll Patient</div>
+                </div>
+				
+		    </div>
+        </div>
+     
+    
+    <div class="app-page" data-page="signin">
+        <div class="app-topbar">
+            <div class="app-title">Sign-in</div>
+        </div>
+        <div class="app-content">
+            <div class="app-section"  id="message"> </div>
+            <div class="app-section">
+                User Id<input class="app-input" id="uid">
+            </div>
+            <div class="app-section">
+				Password<input class="app-input" type = "password" id="pwd">
+            </div>
+            <div class="app-section">
+                <div class="app-button green" id="signin">Sign-in</div>
+			</div>
+        </div>
+     </div>
+
+    <div class="app-page" data-page="AddData">
+        <div class="app-topbar">
+            <div class="app-title">Add Patient Data</div>
+        </div>
+        <div class="app-content">
+            <div class="app-section"  id="message"> </div>
+            <div class="app-section">
+                Patient Id<input class="app-input" id="patid">
+            </div>
+            <div class="app-section">
+                Patient Name<input class="app-input" id="patname">
+            </div>
+            <div class="app-section">
+                Test Date, Time<input class="app-input" id="testdate">
+            </div>
+            <div class="app-section">
+                Systolic<input class="app-input" id="systolic">
+            </div>
+            <div class="app-section">
+                Diastolic<input class="app-input" id="diastolic">
+            </div>
+            <div class="app-section">
+                Blood Sugar<input class="app-input" id="sugar">
+            </div>
+            <div class="app-section">
+                Temperature<input class="app-input" id="temp">
+            </div>
+            <div class="app-section">
+                <div class="left app-button green"  id="commit">Save</div>
+                <div class="right app-button red" data-target="home" id="cancel">Cancel</div>
+            </div>
+    </div>
+    </div>
+   
+
+    <div class="app-page" data-page="ViewData">
+        <div class="app-topbar">
+            <div class="app-title">View Patient Data..</div>
+        </div>
+        <div class="app-content">
+            <div class="app-section"  id="message"> </div>
+            <div class="app-section">
+                Patient Id<input class="app-input" id="patid">
+            </div>
+            <div class="app-section">
+                Patient Name<input class="app-input" id="patname">
+            </div>
+            <div class="app-section">
+            <div id="dvTable" align="left">
+            </div>
+            </div>
+            <div class="app-section">
+            <div id="chartContainer" style="height: 400px; width: 100%;"></div>
+            </div>
+			<div class="app-section">
+            <div id="ecgContainer" style="height: 400px; width: 100%;"></div>
+            </div>
+            <div class="app-section">
+            <div class="left app-button green"  id="Get">Find</div>
+            <div class="app-button red" data-target="home">Back</div>
+            </div>
+            <div class="app-section">
+                <div class="left app-button blue"  id="grph">Graph</div>
+                
+            </div>
+			<div class="app-section">
+                <div class="left app-button blue"  id="ecg">ECG</div>
+                
+            </div>
+            
+        </div>
+    </div>
+   
+   <div class="app-page" data-page="ViewData_Patient">
+        <div class="app-topbar">
+            <div class="app-title">View Patient Data*</div>
+        </div>
+        <div class="app-content">
+            <div class="app-section"  id="message"> </div>
+            <div class="app-section">
+                Patient Id<input class="app-input" id="patid">
+            </div>
+            <div class="app-section">
+                Patient Name<input class="app-input" id="patname">
+            </div>
+            <div class="app-section">
+            <div id="dvTable" align="center">
+            </div>
+            </div>
+            <div class="app-section">
+            <div id="chartContainer" style="height: 400px; width: 100%;"></div>
+            </div>
+			<div class="app-section">
+            <div id="ecgContainer" style="height: 400px; width: 100%;"></div>
+            </div>
+            <div class="app-section">
+            <div class="left app-button green"  id="Get">Find</div>
+            
+            </div>
+            <div class="app-section">
+                <div class="left app-button blue"  id="grph">Graph</div>
+                
+            </div>
+            <div class="app-section">
+                <div class="left app-button blue"  id="ecg">ECG</div>
+                
+            </div>
+        </div>
+    </div>
+
+	
+    <div class="app-page" data-page="Enroll">
+        <div class="app-topbar">
+            <div class="app-title">Enroll Patient</div>
+        </div>
+        <div class="app-content">
+            <div class="app-section"  id="message"> </div>
+            <div class="app-section">
+            Name<input class="app-input" id="name">
+            </div>
+            <div class="app-section">
+            Address<input class="app-input" id="address">
+            </div>
+           <div class="app-section">
+            Mobile<input class="app-input" id="mobile">
+            </div>
+            <div class="app-section">
+            User Id<input class="app-input" id="uid">
+            </div>
+            <div class="app-section">
+            Password<input class="app-input" type = "password" id="pwd">
+            </div>
+           <div class="app-section">
+            Enrollment Date<input class="app-input" id="enrolldate">
+            </div>
+            <!--
+            <label>Select a single package.</label>
+            <div><select id = "selPackage" size = "2">                      >
+                <option value = "Package 1">Package 1 - All parameters</option>
+                <option value = "Package 2">Package 2 - Only Blood pressure</option>
+                <option value = "Package 3">Package 3 - Only Blood sugar</option>
+                <option value = "Package 4">Package 4 - Blood pressure and sugar</option>
+                
+            </select></div>
+            
+            Preferred time<input class="app-input">
+            -->
+            <div class="app-section">
+            <div class="app-button green" id="enroll">Enroll</div>
+            <div class="app-button red" data-target="home">Cancel</div>
+            </div>
+        </div>
+    </div>
+    
+    
+   <!-- <script src="./appjs/zepto.js"></script>   
+    <script type="text/javascript" src="./appjs/jquery-1.10.2.min.js"></script>-->
+    
+   
+     <script src="./appjs/zepto.js"></script>
+     <script src="./appjs/app.min.js"></script>
+     <script src="./appjs/canvasjs.min.js"></script>
+    <script src="./appjs/moment.js"></script>
+    <script>
+      /* put your javascript here */
+     var err = 0;
+     var cust = new Array();
+	 var custecg = new Array();
+     var userid = 0;
+      App.load('initial', function () {
+        
+        
+        //alert("signin code");
+        
+        });
+    App.controller('AddData', function (page) {
+        $(page).find("#message").hide();
+        //$(page).find("#datetime").val($.datepicker.formatDate('yy/mm/dd', new Date()));
+        //alert(moment().format('DD-MMM-YYYY'));
+        $(page).find("#testdate").val(moment().format("DD-MMM-YYYY HH:mm:ss"));
+         $(page).find('#testdate').attr("disabled",true);
+         $(page).find('#patid').change(function() {
+            //alert( "Handler for .change() called." );
+            //alert($(page).find("#patid").val());
+            
+             $.ajax({
+                type: 'GET',
+                //url: 'http://localhost/getname.php',
+                url: 'getname.php',
+                // data to be added to query string:
+                data: { id: $(page).find("#patid").val()},
+                // type of data we are expecting in return:
+                dataType: 'text',
+                timeout: 6000,
+                context: $('body'),
+                success: function(data){
+                    
+                       /*alert("Success");
+                       alert(data);  */
+
+                       if (data != -1) {
+                           $(page).find("#message").hide();
+                           $('#patname').val(data);
+                           $('#patname').attr("disabled",true);
+                       } else{
+                           $("#message").html("Patient id is incorrect").show();
+                           $('#patname').val("");
+                           $('#patname').attr("disabled",true);
+                           $('#patid').focus();
+                       }
+                    
+                },
+                error: function(xhr, type){
+                    
+                        alert( "Error" );
+                    
+                }
+        });
+       
+            });
+            $(page).find('#diastolic').change(function() {
+                if (parseInt($("#systolic").val(),10) <= parseInt($("#diastolic").val(),10)){
+                $("#message").html("Systolic cannot be less than diastolic").show();
+                $('#systolic').focus();
+                err = 1;
+                }else { err = 0;
+                $("#message").html("").show();
+                }
+            });
+            $(page).find('#sugar').change(function() {
+                if (parseInt($("#sugar").val(),10) >300 ){
+                $("#message").html("Sugar levels are incorrectly entered").show();
+                $('#sugar').focus();
+                err = 1;
+                }else  { err = 0;
+                $("#message").html("").show();
+                }
+            });
+            $(page).find('#temp').change(function() {
+                if ((parseInt($("#temp").val(),10) <= 90) || (parseInt($("#temp").val(),10) > 105) ){
+                $("#message").html("Temperature values are incorrectly entered").show();
+                $('#temp').focus();
+                err = 1;
+                }else { err = 0;
+                $("#message").html("").show();
+                }
+            });
+             $(page).find('#commit').click(function(){
+            //alert("Clicked");
+            //alert($(page).find("#testdate").val());
+            
+            $(page).find("#message").hide();
+            if (err == 0) {
+            $.ajax({
+                type: 'GET',
+                //url: 'http://localhost/savedata.php',
+                url: 'savedata.php',
+                //contentType:"application/json; charset=utf-8",
+                // data to be added to query string:
+                data: { id: $(page).find("#patid").val(), 
+                        dt: JSON.stringify($(page).find("#testdate").val()),
+                        sys: $(page).find("#systolic").val(), 
+                        dia:$(page).find("#diastolic").val(),
+                        sugar:$(page).find("#sugar").val(),
+                        temp: $(page).find("#temp").val()},
+                // type of data we are expecting in return:
+                dataType: 'json',
+                timeout: 6000,
+                context: $('body'),
+                success: function(data){
+                    
+                       /*alert("Success");
+                       alert(data);  */
+
+                       if (data != -1) {
+                           alert("Patient data saved");
+                           //$("#AddData")[0].reset();   --does not work Apr 24 2017
+                           //$('#patid').focus();
+                           App.load('home', function () {
+                                // done!
+                                });
+                       } else{
+                           alert("Patient data not saved");
+                           App.load('home', function () {
+                            // done!
+                            });
+                       }
+                    
+                },
+                error: function(xhr, type){
+                    
+                        alert( "Error" );
+                    
+                }
+        });
+            }
+        })
+    });
+    
+    App.controller('ViewData', function (page) {
+        $(page).find("#message").hide();
+        $(page).find("#grph").hide();
+		$(page).find("#ecg").hide();
+        $(page).find("#chartContainer").hide();
+		$(page).find("#ecgContainer").hide();
+        
+         $(page).find('#patid').change(function() {
+            //alert( "Handler for .change() called." );
+            //alert($(page).find("#patid").val());
+           $(page).find("#dvTable").hide();
+           $(page).find("#chartContainer").hide();
+             $.ajax({
+                type: 'GET',
+                //url: 'http://localhost/getname.php',
+                url: 'getname.php',
+                // data to be added to query string:
+                data: { id: $(page).find("#patid").val()},
+                // type of data we are expecting in return:
+                dataType: 'text',
+                timeout: 6000,
+                context: $('body'),
+                success: function(data){
+                    
+                       /*alert("Success");
+                       alert(data);  */
+
+                       if (data != -1) {
+                           $(page).find("#message").hide();
+                           $('#patname').val(data);
+                           $('#patname').attr("disabled",true);
+                       } else{
+                           $("#message").html("Patient id is incorrect").show();
+                           $('#patname').val("");
+                           $('#patname').attr("disabled",true);
+                           $('#patid').focus();
+                       }
+                    
+                },
+                error: function(xhr, type){
+                    
+                        alert( "Error" );
+                    
+                }
+        });
+       
+            });
+             $(page).find('#Get').click(function(){
+                // alert($(page).find("#patid").val());
+                $.ajax({
+                    type: 'GET',
+                   // url: 'http://localhost/getdata.php',
+                    url: 'getdata.php',
+                    // data to be added to query string:
+                    data: { id: $(page).find("#patid").val()},
+                    // type of data we are expecting in return:
+                    dataType: 'json',
+                    timeout: 6000,
+                    context: $('body'),
+                    success: function(data){
+                        
+                        //alert("Success..");
+                        //alert(data.length);
+                        var customers = new Array();
+                        customers.push(["Date", "Systolic", "Diastolic","Blood Sugar","Temp"]);
+                        for (var i = 0; i < data.length; i++){
+                        customers.push([data[i][0],data[i][1] ,data[i][2],data[i][3],data[i][4]] ); 
+                    };
+                    cust = customers;
+                    //alert(customers);
+                     // Create a HTML Table element.
+                    var table = $("<table />");
+                    table[0].border = "1";
+            
+                    //Get the count of columns.
+                    var columnCount = customers[0].length;
+                    
+                    //Add the header row.
+                    var row = $(table[0].insertRow(-1));
+                    for (var i = 0; i < columnCount; i++) {
+                        var headerCell = $("<th />");
+                        headerCell.html(customers[0][i]);
+                        row.append(headerCell);
+                    }
+            
+                    //alert("Add the data rows");
+                    for (var i = 1; i < customers.length; i++) {
+                        row = $(table[0].insertRow(-1));
+                        for (var j = 0; j < columnCount; j++) {
+                            var cell = $("<td />");
+                            cell.html(customers[i][j]);
+                            row.append(cell);
+                        }
+                    }
+            
+                    var dvTable = $("#dvTable");
+                    dvTable.html("");
+                    dvTable.append(table);
+                    $(page).find("#dvTable").show();
+                    $(page).find("#grph").show();
+                    
+                    
+                },
+                error: function(xhr, type){
+                    
+                        alert( "No test data exists" );
+                    
+                }
+    });
+       
+	   $.ajax({
+                    type: 'GET',
+                   // url: 'http://localhost/getdata.php',
+                    url: 'getecgdata.php',
+                    // data to be added to query string:
+                    data: { id: $(page).find("#patid").val()},
+                    // type of data we are expecting in return:
+                    dataType: 'json',
+                    timeout: 6000,
+                    context: $('body'),
+                    success: function(data){
+                        
+                        //alert("Success..");
+                        //alert(data.length);
+                        var cust_ecg = new Array();
+                        cust_ecg.push(["Millis", "Value"]);
+                        for (var i = 0; i < data.length; i++){
+                        cust_ecg.push([data[i][0],data[i][1]]); 
+                    };
+                    custecg = cust_ecg;
+                    //alert(customers);
+                                       
+                    
+                },
+                error: function(xhr, type){
+                    
+                        alert( "No ecg data exists" );
+                    
+                }
+    })
+
+        });
+        $(page).find('#grph').click(function(){
+            //alert(cust);
+            //alert(cust.length);
+            $(page).find("#chartContainer").show();
+            var tmp1;
+            var dataPoints1 = [];
+            var dataPoints2 = [];
+            var dataPoints3 = [];
+            /*
+            for (var i = 1; i < cust.length; i++){
+                        tmp1 = "{x: "+i;
+                        dataPoints.push(tmp1);
+                        tmp1 = "y: "+cust[i][1]+"}";
+                        dataPoints.push(tmp1);
+                        
+            } 
+            */
+            for(var i = 1; i < cust.length; i++){
+                dataPoints1.push({x: i, y: parseInt(cust[i][1],10)});
+                //alert(cust[i][1]);
+            }
+            for(var i = 1; i < cust.length; i++){
+                dataPoints2.push({x: i, y: parseInt(cust[i][2],10)});
+                //alert(cust[i][1]);
+            }
+            for(var i = 1; i < cust.length; i++){
+                dataPoints3.push({x: i, y: parseInt(cust[i][3],10)});
+                //alert(cust[i][1]);
+            }
+            //alert(dataPoints);
+            var chart = new CanvasJS.Chart("chartContainer", {
+			title: {
+				text: "Parameter Chart"
+			},
+			axisX: {
+				interval: 1
+			},
+			data: [{
+				type: "line",
+                 showInLegend: true,
+                 legendText: "Systolic",
+				dataPoints:  dataPoints1
+			},
+            {
+				type: "line",
+                 showInLegend: true,
+                 legendText: "Diastolic",
+				dataPoints:  dataPoints2
+			},
+            {
+				type: "line",
+                 showInLegend: true,
+                 legendText: "Sugar",
+				dataPoints:  dataPoints3
+			}]
+		});
+		chart.render();
+        })
+		
+		$(page).find('#ecg').click(function(){
+            //alert(cust);
+            //alert(cust.length);
+            $(page).find("#ecgContainer").show();
+            var tmp1;
+            var dataPoints1 = [];
+            
+            
+            for(var i = 1; i < custecg.length; i++){
+                dataPoints1.push({x: i, y: parseInt(custecg[i][1],10)*3.3/4096.0});
+                //alert(cust[i][1]);
+            }
+            
+            //alert(dataPoints);
+            var chart = new CanvasJS.Chart("ecgContainer", {
+			title: {
+				text: "Parameter Chart"
+			},
+			axisX: {
+				interval: 1
+			},
+			data: [{
+				type: "line",
+                 showInLegend: true,
+                 legendText: "Systolic",
+				dataPoints:  dataPoints1
+			}]
+		});
+		chart.render();
+        })
+             });
+   
+   App.controller('ViewData_Patient', function (page) {
+        $(page).find("#message").hide();
+        $(page).find("#grph").hide();
+        $(page).find("#chartContainer").hide();
+        $(page).find('#patid').val(userid);
+         $(page).find('#patid').attr("disabled",true);
+
+        $.ajax({
+                type: 'GET',
+                //url: 'http://localhost/getname.php',
+                url: 'getname.php',
+                // data to be added to query string:
+                data: { id: $(page).find("#patid").val()},
+                // type of data we are expecting in return:
+                dataType: 'text',
+                timeout: 6000,
+                context: $('body'),
+                success: function(data){
+                    
+                       /*alert("Success");
+                       alert(data);  */
+
+                       if (data != -1) {
+                           $(page).find("#message").hide();
+                           $('#patname').val(data);
+                           $('#patname').attr("disabled",true);
+                       } else{
+                           $("#message").html("Patient id is incorrect").show();
+                           $('#patname').val("");
+                           $('#patname').attr("disabled",true);
+                           $('#patid').focus();
+                       }
+                    
+                },
+                error: function(xhr, type){
+                    
+                        alert( "Error" );
+                    
+                }
+        });
+       
+           
+             $(page).find('#Get').click(function(){
+                // alert($(page).find("#patid").val());
+                $.ajax({
+                    type: 'GET',
+                   // url: 'http://localhost/getdata.php',
+                    url: 'getdata.php',
+                    // data to be added to query string:
+                    data: { id: $(page).find("#patid").val()},
+                    // type of data we are expecting in return:
+                    dataType: 'json',
+                    timeout: 6000,
+                    context: $('body'),
+                    success: function(data){
+                        
+                        //alert("Success..");
+                        //alert(data.length);
+                        var customers = new Array();
+                        customers.push(["Date", "Systolic", "Diastolic","Blood Sugar","Temp"]);
+                        for (var i = 0; i < data.length; i++){
+                        customers.push([data[i][0],data[i][1] ,data[i][2],data[i][3],data[i][4]] ); 
+                    };
+                    cust = customers;
+                    //alert(customers);
+                     // Create a HTML Table element.
+                    var table = $("<table />");
+                    table[0].border = "1";
+            
+                    //Get the count of columns.
+                    var columnCount = customers[0].length;
+                    
+                    //Add the header row.
+                    var row = $(table[0].insertRow(-1));
+                    for (var i = 0; i < columnCount; i++) {
+                        var headerCell = $("<th />");
+                        headerCell.html(customers[0][i]);
+                        row.append(headerCell);
+                    }
+            
+                    //alert("Add the data rows");
+                    for (var i = 1; i < customers.length; i++) {
+                        row = $(table[0].insertRow(-1));
+                        for (var j = 0; j < columnCount; j++) {
+                            var cell = $("<td />");
+                            cell.html(customers[i][j]);
+                            row.append(cell);
+                        }
+                    }
+            
+                    var dvTable = $("#dvTable");
+                    dvTable.html("");
+                    dvTable.append(table);
+                    $(page).find("#grph").show();
+                    
+                    
+                },
+                error: function(xhr, type){
+                    
+                        alert( "No test data exists" );
+                    
+                }
+    });
+       $.ajax({
+                    type: 'GET',
+                   // url: 'http://localhost/getdata.php',
+                    url: 'getecgdata.php',
+                    // data to be added to query string:
+                    data: { id: $(page).find("#patid").val()},
+                    // type of data we are expecting in return:
+                    dataType: 'json',
+                    timeout: 6000,
+                    context: $('body'),
+                    success: function(data){
+                        
+                        //alert("Success..");
+                        //alert(data.length);
+                        var cust_ecg = new Array();
+                        cust_ecg.push(["Millis", "Value"]);
+                        for (var i = 0; i < data.length; i++){
+                        cust_ecg.push([data[i][0],data[i][1]]); 
+                    };
+                    custecg = cust_ecg;
+                    //alert(customers);
+                                       
+                    
+                },
+                error: function(xhr, type){
+                    
+                        alert( "No ecg data exists" );
+                    
+                }
+    })
+
+        });
+        $(page).find('#grph').click(function(){
+            //alert(cust);
+            //alert(cust.length);
+            $(page).find("#chartContainer").show();
+            var tmp1;
+            var dataPoints1 = [];
+            var dataPoints2 = [];
+            var dataPoints3 = [];
+            /*
+            for (var i = 1; i < cust.length; i++){
+                        tmp1 = "{x: "+i;
+                        dataPoints.push(tmp1);
+                        tmp1 = "y: "+cust[i][1]+"}";
+                        dataPoints.push(tmp1);
+                        
+            } 
+            */
+            for(var i = 1; i < cust.length; i++){
+                dataPoints1.push({x: i, y: parseInt(cust[i][1],10)});
+                //alert(cust[i][1]);
+            }
+            for(var i = 1; i < cust.length; i++){
+                dataPoints2.push({x: i, y: parseInt(cust[i][2],10)});
+                //alert(cust[i][1]);
+            }
+            for(var i = 1; i < cust.length; i++){
+                dataPoints3.push({x: i, y: parseInt(cust[i][3],10)});
+                //alert(cust[i][1]);
+            }
+            //alert(dataPoints);
+            var chart = new CanvasJS.Chart("chartContainer", {
+			title: {
+				text: "Parameter Chart"
+			},
+			axisX: {
+				interval: 1
+			},
+			data: [{
+				type: "line",
+                 showInLegend: true,
+                 legendText: "Systolic",
+				dataPoints:  dataPoints1
+			},
+            {
+				type: "line",
+                 showInLegend: true,
+                 legendText: "Diastolic",
+				dataPoints:  dataPoints2
+			},
+            {
+				type: "line",
+                 showInLegend: true,
+                 legendText: "Sugar",
+				dataPoints:  dataPoints3
+			}]
+		});
+		chart.render();
+        })
+		
+		$(page).find('#ecg').click(function(){
+            //alert(cust);
+            //alert(cust.length);
+            $(page).find("#ecgContainer").show();
+            var tmp1;
+            var dataPoints1 = [];
+            
+            
+            for(var i = 1; i < custecg.length; i++){
+                dataPoints1.push({x: i, y: parseInt(custecg[i][1],10)*3.3/4096.0});
+                //alert(cust[i][1]);
+            }
+            
+            //alert(dataPoints);
+            var chart = new CanvasJS.Chart("ecgContainer", {
+			title: {
+				text: "Parameter Chart"
+			},
+			axisX: {
+				interval: 1
+			},
+			data: [{
+				type: "line",
+                 showInLegend: true,
+                 legendText: "Systolic",
+				dataPoints:  dataPoints1
+			}]
+		});
+		chart.render();
+        })
+             });
+
+   App.controller('Enroll', function (page) {
+        $(page).find("#message").hide();
+         
+        //$(page).find("#datetime").val($.datepicker.formatDate('yy/mm/dd', new Date()));
+        //alert(moment().format('DD-MMM-YYYY'));
+        $(page).find("#enrolldate").val(moment().format("DD-MMM-YYYY"));
+        //alert(JSON.stringify($(page).find("#enrolldate").val()));
+         $(page).find('#enrolldate').attr("disabled",true);
+        $(page).find('#enroll').click(function(){
+             $.ajax({
+                type: 'GET',
+                //url: 'http://localhost/enrolldata.php',
+                url: 'enrolldata.php',
+                //contentType:"application/json; charset=utf-8",
+                //contentType:"application/x-www-form-urlencoded; charset=UTF-8",
+                // data to be added to query string:
+                data: {  ed: JSON.stringify($(page).find("#enrolldate").val()),
+                        name: JSON.stringify($(page).find("#name").val()), 
+                        addr:JSON.stringify($(page).find("#address").val()),
+                         uid: JSON.stringify($(page).find("#uid").val()),
+                        pwd: JSON.stringify($(page).find("#pwd").val()),
+                        mob:parseInt($(page).find("#mobile").val())},
+                // type of data we are expecting in return:
+                dataType: 'text',
+                timeout: 6000,
+                context: $('body'),
+                success: function(data){
+                    
+                       /*alert("Success");
+                       alert(data);  */
+
+                       if (data != -1) {
+                           alert("Patient enrolled with id: "+data);
+                           //$("#AddData")[0].reset();   --does not work Apr 24 2017
+                           //$('#patid').focus();
+                           App.load('home', function () {
+                                // done!
+                                });
+                       } else{
+                           alert("Patient not enrolled");
+                           App.load('home', function () {
+                            // done!
+                            });
+                       }
+                    
+                },
+                error: function(xhr, type){
+                    
+                        alert( "Error" );
+                    
+                }
+        });
+
+        });
+   });
+
+    App.controller('signin', function (page) {
+         $(page).find("#message").hide();
+        
+            
+         $(page).find("#signin").click(function(){
+            //alert("Clicked");
+             $.ajax({
+                type: 'GET',
+                //url: 'http://localhost/signin.php',
+                url: 'signin.php',
+                //contentType:"application/json; charset=utf-8",
+                // data to be added to query string:
+                data: {  uid: JSON.stringify($(page).find("#uid").val()),
+                        pwd: JSON.stringify($(page).find("#pwd").val())},
+                // type of data we are expecting in return:
+                dataType: 'json',
+                timeout: 6000,
+                context: $('body'),
+                success: function(data){
+                    
+                       //alert("Success");
+                      // alert(data[0]);  
+                       //alert(data[1]);
+                       //alert(data);
+
+                      /* if (data != -1) {
+                           alert("Sign-in Success!!!!");
+                           
+                           App.load('home', function () {
+                                
+                                }); 
+                       }  */
+                       if (data[0] == "A") {
+                           alert("Sign-in Success!!!!");
+                           
+                           App.load('home', function () {
+                                
+                                }); 
+                       } else 
+                       if (data[0] == "P") {
+                           alert("Sign-in Success!!!!");
+                           userid=data[1];
+                           App.load('ViewData_Patient', function () {
+                                
+                                }); 
+                       } else {
+                           //alert("signin failed");
+                           //App.load('signin', function () {
+                            
+                           // });
+                             $("#message").html("User id and/or password are incorrect").show();
+                             $(page).find("#uid").val("");
+                           $(page).find("#pwd").val("");
+                       }
+                    
+                },
+                error: function(xhr, type){
+                    
+                        alert( "Error" );
+                    
+                }
+        });
+
+        });
+   });
+    </script>
+  </body>
+</html>
