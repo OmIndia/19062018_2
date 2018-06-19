@@ -2,13 +2,13 @@
 
 $id      = $_GET['id'];
 
-/*   May 1 2017 - next 4 lines needed for localhost so commented for Heroku
+//   May 1 2017 - next 4 lines needed for localhost so commented for Heroku
+/*
 $link = mysqli_connect("localhost","root","hariom","test");
        if (mysqli_connect_error()){
         die( "Connection error");
         }
-    */
-
+ */ 
 $url = parse_url(getenv("CLEARDB_DATABASE_URL"));
  
 $server = $url["host"];
@@ -23,43 +23,21 @@ if (mysqli_connect_error()){
         }
 
 
-	$query = "SELECT max(yr) from ecgdata WHERE id=$id";
-	if ($result = mysqli_query($link,$query)) {
+$rtn = mysqli_fetch_assoc(mysqli_query($link,"SELECT max(`yr`) as tmp from ecgdata WHERE `patid`=$id"));
+$yr = $rtn['tmp'];
+//echo $yr;
 
-        $rowcount=mysqli_num_rows($result);
-        $yr = array();
-        if ($rowcount > 0){
-            
-            while ($array = mysqli_fetch_row($result)) {
-                $year = $array;
-            }
-             }
-        }
-	$query = "SELECT max(mon) from ecgdata WHERE id=$id AND yr = $yr";
-	if ($result = mysqli_query($link,$query)) {
+$rtn = mysqli_fetch_assoc(mysqli_query($link,"SELECT max(`mon`) as tmp from ecgdata WHERE `patid`=$id AND `yr` = $yr"));
+$mnth = $rtn['tmp'];
+//echo $mnth;
 
-        $rowcount=mysqli_num_rows($result);
-        $mnth = array();
-        if ($rowcount > 0){
-            
-            while ($array = mysqli_fetch_row($result)) {
-                $month = $array;
-            }
-             }
-        }
-	$query = "SELECT max(day) from ecgdata WHERE id=$id AND yr = $yr AND mon = $mnth";
-	if ($result = mysqli_query($link,$query)) {
+$rtn = mysqli_fetch_assoc(mysqli_query($link,"SELECT max(`day`) as tmp from ecgdata WHERE `patid`=$id AND `yr` = $yr AND `mon` = $mnth"));
+$day = $rtn['tmp'];
+//echo $day;
 
-        $rowcount=mysqli_num_rows($result);
-        $day = array();
-        if ($rowcount > 0){
-            
-            while ($array = mysqli_fetch_row($result)) {
-                $year = $array;
-            }
-             }
-        }
-    $query = "SELECT millis,value from ecgdata WHERE id=$id AND yr = $yr AND mon = $mnth AND day=$day";
+	
+	
+    $query = "SELECT `millis`,`value` from ecgdata WHERE `patid`=$id AND `yr` = $yr AND `mon` = $mnth AND day=$day";
     if ($result = mysqli_query($link,$query)) {
 
         //echo "Query was successful";
@@ -67,8 +45,8 @@ if (mysqli_connect_error()){
         $data = array();
         if ($rowcount > 0){
             
-            while ($array = mysqli_fetch_row($result)) {
-                $data[] = $array;
+            while ($arr = mysqli_fetch_row($result)) {
+                $data[] = $arr;
             }
            // while ($row = mysqli_fetch_array($result)){
                 
@@ -80,7 +58,8 @@ if (mysqli_connect_error()){
             
              }
         //mysql_close($link);
-        echo $json;
+			echo $json;
+		
     }
       else  {
         echo -1;  //does not work Apr 23 2017

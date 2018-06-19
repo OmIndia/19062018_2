@@ -372,7 +372,7 @@
            $(page).find("#chartContainer").hide();
              $.ajax({
                 type: 'GET',
-                //url: 'http://localhost/getname.php',
+                //url: 'http://localhost/getname_local.php',
                 url: 'getname.php',
                 // data to be added to query string:
                 data: { id: $(page).find("#patid").val()},
@@ -409,7 +409,7 @@
                 // alert($(page).find("#patid").val());
                 $.ajax({
                     type: 'GET',
-                   // url: 'http://localhost/getdata.php',
+                    //url: 'http://localhost/getdata.php',
                     url: 'getdata.php',
                     // data to be added to query string:
                     data: { id: $(page).find("#patid").val()},
@@ -458,7 +458,7 @@
                     dvTable.append(table);
                     $(page).find("#dvTable").show();
                     $(page).find("#grph").show();
-                    
+                    $(page).find("#ecg").show();
                     
                 },
                 error: function(xhr, type){
@@ -468,38 +468,7 @@
                 }
     });
        
-	   $.ajax({
-                    type: 'GET',
-                   // url: 'http://localhost/getdata.php',
-                    url: 'getecgdata.php',
-                    // data to be added to query string:
-                    data: { id: $(page).find("#patid").val()},
-                    // type of data we are expecting in return:
-                    dataType: 'json',
-                    timeout: 6000,
-                    context: $('body'),
-                    success: function(data){
-                        
-                        //alert("Success..");
-                        //alert(data.length);
-                        var cust_ecg = new Array();
-                        cust_ecg.push(["Millis", "Value"]);
-                        for (var i = 0; i < data.length; i++){
-                        cust_ecg.push([data[i][0],data[i][1]]); 
-                    };
-                    custecg = cust_ecg;
-                    //alert(customers);
-                                       
-                    
-                },
-                error: function(xhr, type){
-                    
-                        alert( "No ecg data exists" );
-                    
-                }
-    })
-
-        });
+	    });
         $(page).find('#grph').click(function(){
             //alert(cust);
             //alert(cust.length);
@@ -566,28 +535,68 @@
             var tmp1;
             var dataPoints1 = [];
             
-            
-            for(var i = 1; i < custecg.length; i++){
-                dataPoints1.push({x: i, y: parseInt(custecg[i][1],10)*3.3/4096.0});
+			$.ajax({
+                    type: 'GET',
+                    //url: 'http://localhost/getecgdata_local.php',
+                    url: 'getecgdata.php',
+                    // data to be added to query string:
+                    data: { id: $(page).find("#patid").val()},
+                    // type of data we are expecting in return:
+                    dataType: 'text',
+                    timeout: 120000,
+                    context: $('body'),
+                    success: function(data){
+                        
+                        //alert("ECG Success..");
+                        //alert(data.length);
+						try {
+							var output = JSON.parse(data);
+							//alert(output.length);
+							
+							
+						} catch (e) {
+							alert("Output is not valid JSON: " + data);
+						}
+                        var cust_ecg = new Array();
+                        //cust_ecg.push(["Millis", "Value"]);
+                        for (var i = 0; i < output.length; i++){
+                        cust_ecg.push([output[i][0],output[i][1]]); 
+                    };
+                    custecg = cust_ecg;
+                    //alert(custecg);
+					//alert(custecg.length);
+                    for(var i = 1; i < custecg.length; i++){
+						dataPoints1.push({x: i, y: parseInt(custecg[i][1],10)*3.3/4096.0});
                 //alert(cust[i][1]);
-            }
+					}
+					$(page).find("#ecgContainer").show();
+					
+					//alert(dataPoints1);
+					var chart = new CanvasJS.Chart("ecgContainer", {
+					title: {
+						text: "Parameter Chart"
+					},
+					axisX: {
+						interval: 1000
+					},
+					data: [{
+						type: "line",
+						showInLegend: true,
+						legendText: "ECG",
+						dataPoints:  dataPoints1
+					}]
+				});
+				chart.render();                   
+                    
+				},
+                error: function(jqXHR, textStatus, errorThrown){
+						alert("ECG ajax error");
+						alert(textStatus);
+						alert(jqXHR.status);
+					}
+				});
             
-            //alert(dataPoints);
-            var chart = new CanvasJS.Chart("ecgContainer", {
-			title: {
-				text: "Parameter Chart"
-			},
-			axisX: {
-				interval: 1
-			},
-			data: [{
-				type: "line",
-                 showInLegend: true,
-                 legendText: "Systolic",
-				dataPoints:  dataPoints1
-			}]
-		});
-		chart.render();
+            
         })
              });
    
@@ -600,7 +609,7 @@
 
         $.ajax({
                 type: 'GET',
-                //url: 'http://localhost/getname.php',
+                //url: 'http://localhost/getname_local.php',
                 url: 'getname.php',
                 // data to be added to query string:
                 data: { id: $(page).find("#patid").val()},
@@ -637,7 +646,7 @@
                 // alert($(page).find("#patid").val());
                 $.ajax({
                     type: 'GET',
-                   // url: 'http://localhost/getdata.php',
+                    //url: 'http://localhost/getdata_local.php',
                     url: 'getdata.php',
                     // data to be added to query string:
                     data: { id: $(page).find("#patid").val()},
@@ -696,18 +705,18 @@
     });
        $.ajax({
                     type: 'GET',
-                   // url: 'http://localhost/getdata.php',
+                    //url: 'http://localhost/getecgdata_local.php',
                     url: 'getecgdata.php',
                     // data to be added to query string:
                     data: { id: $(page).find("#patid").val()},
                     // type of data we are expecting in return:
                     dataType: 'json',
-                    timeout: 6000,
+                    timeout: 120000,
                     context: $('body'),
                     success: function(data){
                         
-                        //alert("Success..");
-                        //alert(data.length);
+                        alert("ECG Success..");
+                        alert(data.length);
                         var cust_ecg = new Array();
                         cust_ecg.push(["Millis", "Value"]);
                         for (var i = 0; i < data.length; i++){
@@ -720,7 +729,7 @@
                 },
                 error: function(xhr, type){
                     
-                        alert( "No ecg data exists" );
+                        alert( "No ecg data in viewdata_patient exists" );
                     
                 }
     })
