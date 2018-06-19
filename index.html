@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
   <head>
     <title>My App</title>
@@ -9,27 +10,11 @@
     <link rel="stylesheet" href="./appjs/app.min.css">
     <style>
       /* put your styles here */
-     /* .app-button{
-          width:400px;
-      } */
-      * {
-    padding: 0;
-    margin: 0;
-  }
-  .fit { /* set relative picture size */
-    max-width: 100%;
-    max-height: 100%;
-  }
-  .center {
-    display: block;
-    margin: auto;
-  }
     </style>
   </head>
-  <body oncontextmenu="return false" onkeydown="return false;" onmousedown="return false;">
+  <body>
     <!-- put your pages here -->
-
-    <div class="app-page" data-page="initial">
+	<div class="app-page" data-page="initial">
         <div class="app-topbar">
             <div class="app-title">Welcome</div>
         </div>
@@ -41,10 +26,7 @@
 			</div>
         </div>
      </div>    
-
-
-
-    <div class="app-page" data-page="home">
+ <div class="app-page" data-page="home">
         <div class="app-topbar">
             <div class="app-title">Home page</div>
         </div>
@@ -62,8 +44,7 @@
 				
 		    </div>
         </div>
-     
-    
+      
     <div class="app-page" data-page="signin">
         <div class="app-topbar">
             <div class="app-title">Sign-in</div>
@@ -71,7 +52,7 @@
         <div class="app-content">
             <div class="app-section"  id="message"> </div>
             <div class="app-section">
-                User Id<input class="app-input" id="uid">
+                User Id<input class="app-input" type="text" id="uid">
             </div>
             <div class="app-section">
 				Password<input class="app-input" type = "password" id="pwd">
@@ -81,8 +62,8 @@
 			</div>
         </div>
      </div>
-
-    <div class="app-page" data-page="AddData">
+	 
+	<div class="app-page" data-page="AddData">
         <div class="app-topbar">
             <div class="app-title">Add Patient Data</div>
         </div>
@@ -235,23 +216,17 @@
             </div>
         </div>
     </div>
-    
-    
-   <!-- <script src="./appjs/zepto.js"></script>   
-    <script type="text/javascript" src="./appjs/jquery-1.10.2.min.js"></script>-->
-    
-   
-     <script src="./appjs/zepto.js"></script>
-     <script src="./appjs/app.min.js"></script>
-     <script src="./appjs/canvasjs.min.js"></script>
-    <script src="./appjs/moment.js"></script>
+	 
+    <script src="./appjs/zepto.js"></script>
+    <script src="./appjs/app.min.js"></script>
     <script>
       /* put your javascript here */
-     var err = 0;
-     var cust = new Array();
-	 var custecg = new Array();
-     var userid = 0;
-      App.load('initial', function () {
+	  
+	var err = 0;
+    var cust = new Array();
+	var custecg = new Array();
+    var userid = 0;
+    App.load('initial', function () {
         
         
         //alert("signin code");
@@ -895,8 +870,7 @@
 
         });
    });
-
-    App.controller('signin', function (page) {
+	App.controller('signin', function (page) {
          $(page).find("#message").hide();
         
             
